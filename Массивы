@@ -1,0 +1,38 @@
+Программа использования массива на С++
+
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+int main() {
+    int data[500][500] = {0}; // массив
+
+    string type; // тип запроса
+    int x, y, val;
+    while (true) { // бесконечный цикл
+        cin >> type; // узнаем тип запроса
+
+        if (type == "End") { // если End, то завершаем работу
+            break;
+        } else if (type == "Insert") { // вставка
+            cin >> x >> y >> val;
+
+            data[x][y] = val;
+        } else if (type == "Delete") { // удаление
+            cin >> x >> y;
+
+            data[x][y] = 0;
+        } else if (type == "Get") { // получение значения
+            cin >> x >> y;
+
+            cout << data[x][y] << endl;
+        } else { // что-то пошло не так
+            cout << "Error! Let's try again." << endl;
+        }
+    }
+
+    cout << "\nOk. Good work." << endl;
+
+    return 0;
+}
