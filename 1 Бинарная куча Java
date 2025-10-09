@@ -1,0 +1,22 @@
+public static void main(String[] args) {
+        String original = "AaBbCcDd";
+        
+        #создаем две бинарные кучи для хранения букв
+        BinaryHeap uppercaseHeap = new BinaryHeap();
+        BinaryHeap lowercaseHeap = new BinaryHeap();
+        
+        #заполняем кучи, используя срезы с шагом
+        for (int i = 0; i < original.length(); i++) {
+            char currentChar = original.charAt(i);
+            if (Character.isUpperCase(currentChar)) {
+                uppercaseHeap.add(currentChar);
+            } else if (Character.isLowerCase(currentChar)) {
+                lowercaseHeap.add(currentChar);
+            }
+        }
+        
+        #выводим результаты
+        System.out.println("Заглавные буквы: " + uppercaseHeap.getString());
+        System.out.println("Строчные буквы: " + lowercaseHeap.getString());
+    }
+}
