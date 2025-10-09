@@ -1,0 +1,35 @@
+public class Main {
+    public static void main(String[] args) {
+        #создаем исходный список
+        List<String> originalList = new ArrayList<>();
+        originalList.add("a");
+        originalList.add("1");
+        originalList.add("b");
+        originalList.add("2");
+        originalList.add("c");
+        originalList.add("3");
+        
+        #создаем два новых списка для хранения результатов
+        List<String> lettersList = new ArrayList<>();
+        List<String> numbersList = new ArrayList<>();
+        
+        #проходим по исходному списку и разделяем элементы
+        for (String element : originalList) {
+            #проверяем, является ли элемент буквой
+            if (Character.isLetter(element.charAt(0))) {
+                lettersList.add(element);
+            }
+            #проверяем, является ли элемент числом
+            else if (Character.isDigit(element.charAt(0))) {
+                numbersList.add(element);
+            }
+        }
+        
+        #очищаем исходный список
+        originalList.clear();
+        
+        #выводим результаты
+        System.out.println("Список букв: " + lettersList);
+        System.out.println("Список чисел: " + numbersList);
+    }
+}
