@@ -1,0 +1,52 @@
+#Структура для представления вершины графа
+struct Node {
+    char value;
+    vector<Node*> neighbors;
+    
+    Node(char val) : value(val) {}
+};
+
+int main() {
+    #Создаем исходный список как граф
+    vector<Node*> originalGraph = {
+        new Node('a'),
+        new Node('1'),
+        new Node('b'),
+        new Node('2'),
+        new Node('c'),
+        new Node('3')
+    };
+    
+    #Создаем списки для хранения результатов
+    vector<Node*> letters;
+    vector<Node*> numbers;
+    
+    #Проходим по всем вершинам графа
+    for (Node* node : originalGraph) {
+        if (isalpha(node->value)) {
+            letters.push_back(node);
+        } else if (isdigit(node->value)) {
+            numbers.push_back(node);
+        }
+    }
+    
+    #Выводим результаты
+    cout << "Буквы: ";
+    for (Node* node : letters) {
+        cout << node->value;
+    }
+    cout << endl;
+    
+    cout << "Числа: ";
+    for (Node* node : numbers) {
+        cout << node->value;
+    }
+    cout << endl;
+    
+    #Освобождаем память
+    for (Node* node : originalGraph) {
+        delete node;
+    }
+    
+    return 0;
+}
