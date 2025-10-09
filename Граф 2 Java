@@ -1,36 +1,45 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class ListSeparator {
+public class GraphSplitter {
+    #Класс для представления вершины графа
+    static class Node {
+        String value;
+        List<Node> neighbors = new ArrayList<>();
+        
+        Node(String val) {
+            this.value = val;
+        }
+    }
+    
     public static void main(String[] args) {
-        #Создаем исходный список
-        List<String> originalList = new ArrayList<>();
-        originalList.add("a");
-        originalList.add("1");
-        originalList.add("b");
-        originalList.add("2");
-        originalList.add("c");
-        originalList.add("3");
+        #Исходный список
+        List<String> originalList = Arrays.asList("a", "1", "b", "2", "c", "3");
+        
+        #Создаем граф
+        List<Node> graph = new ArrayList<>();
+        
+        #Заполняем граф узлами
+        for (String item : originalList) {
+            graph.add(new Node(item));
+        }
         
         #Создаем списки для хранения результатов
         List<String> letters = new ArrayList<>();
         List<String> numbers = new ArrayList<>();
         
-        #Проходим по исходному списку
-        for (String item : originalList) {
+        #Проходим по всем узлам графа
+        for (Node node : graph) {
             #Проверяем тип элемента
-            if (Character.isLetter(item.charAt(0))) {
-                letters.add(item);
-            } else if (Character.isDigit(item.charAt(0))) {
-                numbers.add(item);
+            if (Character.isLetter(node.value.charAt(0))) {
+                letters.add(node.value);
+            } else if (Character.isDigit(node.value.charAt(0))) {
+                numbers.add(node.value);
             }
         }
         
-        #Выводим результаты
-        System.out.println("Буквы: " + String.join("", letters));
-        System.out.println("Числа: " + String.join("", numbers));
-        
         #Очищаем исходный список
         originalList.clear();
+        
+        #Выводим результаты
+        System.out.println("Буквы: " + String.join(", ", letters));
+        System.out.println("Числа: " + String.join(", ", numbers));
     }
 }
