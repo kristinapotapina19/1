@@ -1,22 +1,39 @@
-public class StringSlicing {
+public class GraphStringSplit {
+    #Класс для представления вершины графа
+    static class Node {
+        char value;
+        List<Node> neighbors = new ArrayList<>();
+        
+        Node(char val) {
+            this.value = val;
+        }
+    }
+    
     public static void main(String[] args) {
         #Исходная строка
         String original = "AaBbCcDd";
         
-        #Создаем StringBuilder для накопления результатов
+        #Создаем граф
+        List<Node> graph = new ArrayList<>();
+        
+        #Заполняем граф узлами
+        for (char c : original.toCharArray()) {
+            graph.add(new Node(c));
+        }
+        
+        #Создаем списки для хранения результатов
         StringBuilder uppercase = new StringBuilder();
         StringBuilder lowercase = new StringBuilder();
         
-        #Проходим по строке с шагом 2
-        for (int i = 0; i < original.length(); i += 2) {
-            #Добавляем заглавные буквы
-            uppercase.append(original.charAt(i));
+        #Проходим по графу с шагом 2
+        #Собираем заглавные буквы
+        for (int i = 0; i < graph.size(); i += 2) {
+            uppercase.append(graph.get(i).value);
         }
         
-        #Проходим по строке с шагом 2, начиная с 1
-        for (int i = 1; i < original.length(); i += 2) {
-            #Добавляем строчные буквы
-            lowercase.append(original.charAt(i));
+        #Собираем строчные буквы
+        for (int i = 1; i < graph.size(); i += 2) {
+            lowercase.append(graph.get(i).value);
         }
         
         #Выводим результаты
