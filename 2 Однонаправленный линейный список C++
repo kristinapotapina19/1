@@ -1,0 +1,26 @@
+int main() {
+    #создаем исходный список
+    LinkedList originalList;
+    originalList.append('a');
+    originalList.append('1');
+    originalList.append('b');
+    originalList.append('2');
+    originalList.append('c');
+    originalList.append('3');
+    
+    #создаем списки для букв и цифр
+    LinkedList lettersList;
+    LinkedList numbersList;
+    
+    #разделяем исходный список
+    originalList.splitLists(lettersList, numbersList);
+    
+    #выводим результаты
+    cout << "Список букв: ";
+    lettersList.printList();
+    
+    cout << "Список чисел: ";
+    numbersList.printList();
+    
+    return 0;
+}
