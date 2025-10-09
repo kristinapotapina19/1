@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListSeparator {
+    public static void main(String[] args) {
+        #Создаем исходный список
+        List<String> originalList = new ArrayList<>();
+        originalList.add("a");
+        originalList.add("1");
+        originalList.add("b");
+        originalList.add("2");
+        originalList.add("c");
+        originalList.add("3");
+        
+        #Создаем списки для хранения результатов
+        List<String> letters = new ArrayList<>();
+        List<String> numbers = new ArrayList<>();
+        
+        #Проходим по исходному списку
+        for (String item : originalList) {
+            #Проверяем тип элемента
+            if (Character.isLetter(item.charAt(0))) {
+                letters.add(item);
+            } else if (Character.isDigit(item.charAt(0))) {
+                numbers.add(item);
+            }
+        }
+        
+        #Выводим результаты
+        System.out.println("Буквы: " + String.join("", letters));
+        System.out.println("Числа: " + String.join("", numbers));
+        
+        #Очищаем исходный список
+        originalList.clear();
+    }
+}
