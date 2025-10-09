@@ -1,0 +1,27 @@
+   public static void main(String[] args) {
+        #исходный список
+        List<Character> originalList = Arrays.asList('a', '1', 'b', '2', 'c', '3');
+        
+        #создаем две бинарные кучи для хранения символов
+        BinaryHeap lettersHeap = new BinaryHeap();
+        BinaryHeap numbersHeap = new BinaryHeap();
+        
+        #проходим по исходному списку
+        for (char c : originalList) {
+            if (Character.isLetter(c)) {
+                lettersHeap.add(c);
+            } else if (Character.isDigit(c)) {
+                numbersHeap.add(c);
+            }
+        }
+        
+        #выводим результаты
+        System.out.println("Список букв: " + lettersHeap.getString());
+        System.out.println("Список чисел: " + numbersHeap.getString());
+        
+        #очищаем исходные структуры
+        originalList.clear();
+        lettersHeap.clear();
+        numbersHeap.clear();
+    }
+}
