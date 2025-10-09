@@ -1,26 +1,63 @@
-int main() {
-    #Исходная строка
-    string original = "AaBbCcDd";
+#include <iostream>
+#include <vector>
+#include <cctype>
+using namespace std;
+
+#Структура для представления вершины графа
+struct Node {
+    char value;
+    vector<Node*> neighbors;
     
-    #Строки для хранения результатов
+    Node(char val) : value(val) {}
+};
+
+int main() {
+    #Создаем исходный граф из строки
+    string original = "AaBbCcDd";
+    vector<Node*> graph;
+    
+    #Заполняем граф узлами
+    for (char c : original) {
+        graph.push_back(new Node(c));
+    }
+    
+    #Создаем списки для хранения результатов
+    vector<Node*> uppercaseNodes;
+    vector<Node*> lowercaseNodes;
+    
+    #Проходим по всем узлам графа с шагом 2
+    #Для заглавных букв
+    for (size_t i = 0; i < graph.size(); i += 2) {
+        uppercaseNodes.push_back(graph[i]);
+    }
+    
+    #Для строчных букв
+    for (size_t i = 1; i < graph.size(); i += 2) {
+        lowercaseNodes.push_back(graph[i]);
+    }
+    
+    #Формируем результирующие строки
     string uppercase = "";
     string lowercase = "";
     
-    #Проходим по строке с шагом 2
-    for (size_t i = 0; i < original.length(); i += 2) {
-        #Добавляем заглавные буквы
-        uppercase += original[i];
+    #Собираем заглавные буквы
+    for (Node* node : uppercaseNodes) {
+        uppercase += node->value;
     }
     
-    #Проходим по строке с шагом 2, начиная с 1
-    for (size_t i = 1; i < original.length(); i += 2) {
-        #Добавляем строчные буквы
-        lowercase += original[i];
+    #Собираем строчные буквы
+    for (Node* node : lowercaseNodes) {
+        lowercase += node->value;
     }
     
-    # Выводим результаты
+    #Выводим результаты
     cout << "Заглавные буквы: " << uppercase << endl;
     cout << "Строчные буквы: " << lowercase << endl;
+    
+    #Освобождаем память
+    for (Node* node : graph) {
+        delete node;
+    }
     
     return 0;
 }
