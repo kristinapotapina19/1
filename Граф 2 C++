@@ -1,3 +1,8 @@
+#include <iostream>
+#include <vector>
+#include <cctype>
+using namespace std;
+
 #Структура для представления вершины графа
 struct Node {
     char value;
