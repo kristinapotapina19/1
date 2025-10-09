@@ -1,0 +1,23 @@
+int main() {
+    # исходная строка
+    string original = "AaBbCcDd";
+    
+    #создаем списки для заглавных и строчных букв
+    LinkedList uppercaseList;
+    LinkedList lowercaseList;
+    
+    #заполняем списки, используя срезы с шагом
+    for (size_t i = 0; i < original.length(); i++) {
+        if (i % 2 == 0) {
+            uppercaseList.append(original[i]);  
+        } else {
+            lowercaseList.append(original[i]); 
+        }
+    }
+    
+    #выводим результаты
+    cout << "Заглавные буквы: " << uppercaseList.getString() << endl;
+    cout << "Строчные буквы: " << lowercaseList.getString() << endl;
+    
+    return 0;
+}
