@@ -1,0 +1,26 @@
+int main() {
+    #Исходная строка
+    string original = "AaBbCcDd";
+    
+    #Строки для хранения результатов
+    string uppercase = "";
+    string lowercase = "";
+    
+    #Проходим по строке с шагом 2
+    for (size_t i = 0; i < original.length(); i += 2) {
+        #Добавляем заглавные буквы
+        uppercase += original[i];
+    }
+    
+    #Проходим по строке с шагом 2, начиная с 1
+    for (size_t i = 1; i < original.length(); i += 2) {
+        #Добавляем строчные буквы
+        lowercase += original[i];
+    }
+    
+    # Выводим результаты
+    cout << "Заглавные буквы: " << uppercase << endl;
+    cout << "Строчные буквы: " << lowercase << endl;
+    
+    return 0;
+}
