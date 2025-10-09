@@ -1,0 +1,12 @@
+public class Main {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        #создается пустой список
+        list.add("Первый");
+        list.add("Второй");
+        list.add("Третий");
+        # каждый вызов метода add() добавляет новый элемент в конец списка
+        list.printList();
+        #вывод содержимого списка
+    }
+}
