@@ -1,0 +1,26 @@
+public class StringSlicing {
+    public static void main(String[] args) {
+        #Исходная строка
+        String original = "AaBbCcDd";
+        
+        #Создаем StringBuilder для накопления результатов
+        StringBuilder uppercase = new StringBuilder();
+        StringBuilder lowercase = new StringBuilder();
+        
+        #Проходим по строке с шагом 2
+        for (int i = 0; i < original.length(); i += 2) {
+            #Добавляем заглавные буквы
+            uppercase.append(original.charAt(i));
+        }
+        
+        #Проходим по строке с шагом 2, начиная с 1
+        for (int i = 1; i < original.length(); i += 2) {
+            #Добавляем строчные буквы
+            lowercase.append(original.charAt(i));
+        }
+        
+        #Выводим результаты
+        System.out.println("Заглавные буквы: " + uppercase.toString());
+        System.out.println("Строчные буквы: " + lowercase.toString());
+    }
+}
