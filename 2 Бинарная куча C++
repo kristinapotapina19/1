@@ -1,0 +1,44 @@
+int main() {
+    #исходный список
+    vector<string> original = {"a", "1", "b", "2", "c", "3"};
+    
+    #создаем две бинарные кучи
+    BinaryHeap lettersHeap;
+    BinaryHeap numbersHeap;
+    
+    #разделяем элементы по типу
+    for (const string& item : original) {
+        if (isdigit(item[0])) {
+            numbersHeap.add(item);
+        } else if (isalpha(item[0])) {
+            lettersHeap.add(item);
+        }
+    }
+    
+    #выводим результаты
+    vector<string> letters = lettersHeap.getElements();
+    vector<string> numbers = numbersHeap.getElements();
+    
+    #сортируем результаты
+    sort(letters.begin(), letters.end());
+    sort(numbers.begin(), numbers.end());
+    
+    #формируем строки для вывода
+    string lettersStr, numbersStr;
+    for (const string& letter : letters) {
+        lettersStr += letter;
+    }
+    for (const string& number : numbers) {
+        numbersStr += number;
+    }
+    
+    cout << "Буквы: " << lettersStr << endl;
+    cout << "Числа: " << numbersStr << endl;
+    
+    #очищаем исходные структуры
+    original.clear();
+    lettersHeap.clear();
+    numbersHeap.clear();
+    
+    return 0;
+}
