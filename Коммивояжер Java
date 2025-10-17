@@ -1,0 +1,65 @@
+import java.util.Arrays;
+public class TravelingSalesman {
+    #функция для вычисления стоимости пути
+    private static int calculateCost(int[][] graph, int[] path) {
+        int cost = 0;
+        for (int i = 0; i < path.length - 1; i++) {
+            cost += graph[path[i]][path[i + 1]];
+        }
+        cost += graph[path[path.length - 1]][path[0]]; #возвращение в начальный город
+        return cost;
+    }
+
+    #рекурсивная функция для поиска минимального пути
+    private static void tsp(int[][] graph, int[] path, boolean[] visited, int minCost, 
+                            int[] bestPath, int pos, int n) {
+        if (path.length == n) {
+            int cost = calculateCost(graph, path);
+            if (cost < minCost) {
+                minCost = cost;
+                System.arraycopy(path, 0, bestPath, 0, path.length); #сохраняем лучший путь
+            }
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                path[path.length] = i; #добавляем город в путь
+                tsp(graph, path, visited, minCost, bestPath, i, n);
+                visited[i] = false; #откатываемся
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        #пример графа (матрица смежности)
+        int[][] graph = {
+            {0, 10, 15, 20},
+            {10, 0, 35, 25},
+            {15, 35, 0, 30},
+            {20, 25, 30, 0}
+        };
+
+        int n = graph.length;
+        int[] path = new int[n];
+        boolean[] visited = new boolean[n];
+        Arrays.fill(visited, false);
+        
+        int minCost = Integer.MAX_VALUE;
+        int[] bestPath = new int[n];
+
+        #начинаем с первого города
+        visited[0] = true;
+        path[0] = 0;
+
+        tsp(graph, path, visited, minCost, bestPath, 0, n);
+
+        System.out.println("Минимальная стоимость пути: " + minCost);
+        System.out.print("Лучший путь: ");
+        for (int city : bestPath) {
+            System.out.print(city + " ");
+        }
+        System.out.println();
+    }
+}
