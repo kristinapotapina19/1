@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <limits.h>
+
+using namespace std;
+
+#функция для вычисления стоимости пути
+int calculateCost(const vector<vector<int>>& graph, const vector<int>& path) {
+    int cost = 0;
+    for (size_t i = 0; i < path.size() - 1; ++i) {
+        cost += graph[path[i]][path[i + 1]];
+    }
+    cost += graph[path.back()][path[0]]; #возвращение в начальный город
+    return cost;
+}
+
+#функция для поиска минимального пути
+void tsp(const vector<vector<int>>& graph, vector<int>& path, vector<bool>& visited, int& minCost, vector<int>& bestPath, int pos, int n) {
+    if (path.size() == n) {
+        int cost = calculateCost(graph, path);
+        if (cost < minCost) {
+            minCost = cost;
+            bestPath = path; #сохраняем лучший путь
+        }
+        return;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        if (!visited[i]) {
+            visited[i] = true;
+            path.push_back(i);
+            tsp(graph, path, visited, minCost, bestPath, i, n);
+            path.pop_back();
+            visited[i] = false;
+        }
+    }
+}
+
+int main() {
+    #пример графа (матрица смежности)
+    vector<vector<int>> graph = {
+        {0, 10, 15, 20},
+        {10, 0, 35, 25},
+        {15, 35, 0, 30},
+        {20, 25, 30, 0}
+    };
+
+    int n = graph.size();
+    vector<int> path;
+    vector<bool> visited(n, false);
+    int minCost = INT_MAX;
+    vector<int> bestPath;
+
+    #начинаем с первого города
+    visited[0] = true;
+    path.push_back(0);
+    
+    tsp(graph, path, visited, minCost, bestPath, 0, n);
+
+    cout << "Минимальная стоимость пути: " << minCost << endl;
+    cout << "Лучший путь: ";
+    for (int city : bestPath) {
+        cout << city << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
