@@ -1,0 +1,80 @@
+public class FibonacciSearch {
+
+    #Метод для нахождения минимального из двух чисел
+    private static int min(int x, int y) {
+        return (x <= y) ? x : y;
+    }
+
+    #Метод для выполнения Фибоначчи поиска
+    public static int fibonacciSearch(int[] arr, int target) {
+        int n = arr.length;
+        int fibM2 = 0; // (m-2)'е число Фибоначчи
+        int fibM1 = 1; // (m-1)'е число Фибоначчи
+        int fibM = fibM1 + fibM2; // m'е число Фибоначчи
+
+        #Находим m'е число Фибоначчи большее или равное n
+        while (fibM < n) {
+            fibM2 = fibM1;
+            fibM1 = fibM;
+            fibM = fibM1 + fibM2;
+        }
+
+        #Индекс, который будет использоваться для сравнения
+        int offset = -1;
+
+        #Основной цикл поиска
+        while (fibM > 1) {
+            #Индекс, который мы будем проверять
+            int i = min(offset + fibM2, n - 1);
+
+            #Если элемент меньше, чем целевой, сдвигаем диапазон вправо
+            if (arr[i] < target) {
+                fibM = fibM1;
+                fibM1 = fibM2;
+                fibM2 = fibM - fibM1;
+                offset = i;
+            }
+            #Если элемент больше, чем целевой, сдвигаем диапазон влево
+            else if (arr[i] > target) {
+                fibM = fibM2;
+                fibM1 = fibM1 - fibM2;
+                fibM2 = fibM - fibM1;
+            }
+            #Если элемент найден, возвращаем индекс
+            else {
+                return i;
+            }
+        }
+
+        #Сравниваем последний элемент
+        if (fibM1 == 1 && arr[offset + 1] == target) {
+            return offset + 1;
+        }
+
+        return -1; #Если элемент не найден, возвращаем -1
+    }
+
+    #Метод для печати массива
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 22, 35, 40, 45, 50, 80, 82, 85, 90}; #Массив должен быть отсортирован
+        int target = 85;
+
+        System.out.println("Исходный массив:");
+        printArray(arr);
+
+        int result = fibonacciSearch(arr, target);
+
+        if (result != -1) {
+            System.out.println("Элемент " + target + " найден на индексе: " + result);
+        } else {
+            System.out.println("Элемент " + target + " не найден в массиве.");
+        }
+    }
+}
