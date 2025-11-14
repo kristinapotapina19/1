@@ -1,0 +1,60 @@
+public class QuickSort {
+
+    #Метод для выполнения быстрой сортировки
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            #Находим индекс разделителя
+            int pivotIndex = partition(arr, low, high);
+
+            #Рекурсивно сортируем элементы до и после разделителя
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    #Метод для разделения массива и нахождения индекса разделителя
+    private static int partition(int[] arr, int low, int high) {
+        #Выбираем последний элемент в качестве опорного
+        int pivot = arr[high];
+        int i = (low - 1); #Индекс меньшего элемента
+
+        for (int j = low; j < high; j++) {
+            #Если текущий элемент меньше или равен опорному
+            if (arr[j] <= pivot) {
+                i++;
+
+                #Меняем местами arr[i] и arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        #Меняем местами опорный элемент с элементом после последнего меньшего
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1; #Возвращаем индекс разделителя
+    }
+
+    #Метод для печати массива
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 7, 8, 9, 1, 5};
+
+        System.out.println("Исходный массив:");
+        printArray(arr);
+
+        quickSort(arr, 0, arr.length - 1);
+
+        System.out.println("Отсортированный массив:");
+        printArray(arr);
+    }
+}
