@@ -1,0 +1,37 @@
+public class LinearSearch {
+
+    #Метод для выполнения последовательного поиска
+    public static int linearSearch(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            #Сравниваем текущий элемент с целевым
+            if (arr[i] == target) {
+                return i; #Возвращаем индекс найденного элемента
+            }
+        }
+        return -1; #Если элемент не найден, возвращаем -1
+    }
+
+    #Метод для печати массива
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 5, 2, 4, 9, 1};
+        int target = 4;
+
+        System.out.println("Исходный массив:");
+        printArray(arr);
+
+        int result = linearSearch(arr, target);
+
+        if (result != -1) {
+            System.out.println("Элемент " + target + " найден на индексе: " + result);
+        } else {
+            System.out.println("Элемент " + target + " не найден в массиве.");
+        }
+    }
+}
