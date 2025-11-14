@@ -1,0 +1,45 @@
+using namespace std;
+
+#Функция для сортировки массива с использованием алгоритма сортировки выбором
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        #Предполагаем, что минимальный элемент находится на текущей позиции
+        int minIndex = i;
+        
+        #Находим индекс минимального элемента в оставшейся части массива
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j; #Обновляем индекс минимального элемента
+            }
+        }
+        
+        #Меняем местами текущий элемент и найденный минимальный элемент
+        if (minIndex != i) {
+            swap(arr[i], arr[minIndex]);
+        }
+    }
+}
+
+#Функция для вывода массива
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+#Главная функция
+int main() {
+    int arr[] = {64, 25, 12, 22, 11}; // Исходный массив
+    int n = sizeof(arr) / sizeof(arr[0]); // Размер массива
+
+    cout << "Исходный массив:\n";
+    printArray(arr, n);
+
+    selectionSort(arr, n); #Сортируем массив
+
+    cout << "Отсортированный массив:\n";
+    printArray(arr, n); #Выводим отсортированный массив
+
+    return 0;
+}
