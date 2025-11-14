@@ -1,0 +1,67 @@
+using namespace std;
+
+#Функция для перестановки двух элементов
+void swap(int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+#Функция для создания кучи
+void heapify(int arr[], int n, int i) {
+    int largest = i; #Инициализируем наибольший элемент как корень
+    int left = 2 * i + 1; #Левый дочерний элемент
+    int right = 2 * i + 2; #Правый дочерний элемент
+
+    #Если левый дочерний элемент больше корня
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    #Если правый дочерний элемент больше наибольшего элемента
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    #Если наибольший элемент не корень
+    if (largest != i) {
+        swap(arr[i], arr[largest]); #Меняем местами
+
+        #Рекурсивно превращаем поддерево в кучу
+        heapify(arr, n, largest);
+    }
+}
+
+#Основная функция пирамидальной сортировки
+void heapSort(int arr[], int n) {
+    #Создаем кучу (перегруппируем массив)
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    #Извлекаем элементы из кучи один за другим
+    for (int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]); #Перемещаем текущий корень в конец
+        heapify(arr, i, 0); #Вызываем heapify на уменьшенной куче
+    }
+}
+
+#Функция для вывода массива
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+
+#Главная функция
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7}; #Исходный массив
+    int n = sizeof(arr) / sizeof(arr[0]); #Размер массива
+
+    cout << "Исходный массив:\n";
+    printArray(arr, n);
+
+    heapSort(arr, n); #Сортируем массив
+
+    cout << "Отсортированный массив:\n";
+    printArray(arr, n); #Выводим отсортированный массив
+
+    return 0;
+}
