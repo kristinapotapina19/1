@@ -1,0 +1,51 @@
+public class InterpolationSearch {
+
+    #Метод для выполнения интерполирующего поиска
+    public static int interpolationSearch(int[] arr, int target) {
+        int low = 0; #Начальный индекс
+        int high = arr.length - 1; #Конечный индекс
+
+        while (low <= high && target >= arr[low] && target <= arr[high]) {
+            #Вычисляем позицию интерполяции
+            int pos = low + ((target - arr[low]) * (high - low)) / (arr[high] - arr[low]);
+
+            #Проверяем, равен ли элемент по позиции целевому значению
+            if (arr[pos] == target) {
+                return pos; #Возвращаем индекс найденного элемента
+            }
+
+            #Если целевое значение больше элемента, сдвигаем нижнюю границу
+            if (arr[pos] < target) {
+                low = pos + 1;
+            } else { #Иначе сдвигаем верхнюю границу
+                high = pos - 1;
+            }
+        }
+
+        return -1; #Если элемент не найден, возвращаем -1
+    }
+
+    #Метод для печати массива
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50, 60, 70, 80, 90}; #Массив должен быть отсортирован
+        int target = 50;
+
+        System.out.println("Исходный массив:");
+        printArray(arr);
+
+        int result = interpolationSearch(arr, target);
+
+        if (result != -1) {
+            System.out.println("Элемент " + target + " найден на индексе: " + result);
+        } else {
+            System.out.println("Элемент " + target + " не найден в массиве.");
+        }
+    }
+}
