@@ -1,0 +1,39 @@
+public class InsertionSort {
+    #метод для сортировки массива методом вставок
+    public static void insertionSort(int[] arr) {
+        int n = arr.length;
+        
+        for (int i = 1; i < n; i++) {
+            int key = arr[i]; #текущий элемент для вставки
+            int j = i - 1;
+
+            #сдвигаем элементы, которые больше ключа, на одну позицию вперед
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            #вставляем ключ на правильную позицию
+            arr[j + 1] = key;
+        }
+    }
+
+    #метод для печати массива
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+
+        System.out.println("Исходный массив:");
+        printArray(arr);
+
+        insertionSort(arr);
+
+        System.out.println("Отсортированный массив:");
+        printArray(arr);
+    }
+}
