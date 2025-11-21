@@ -1,0 +1,43 @@
+int interpolationSearch(const std::vector<int>& arr, int target) {
+    int low = 0;
+    int high = arr.size() - 1;
+
+    while (low <= high && target >= arr[low] && target <= arr[high]) {
+        #Вычисляем позицию
+        int pos = low + ((target - arr[low]) * (high - low)) / (arr[high] - arr[low]);
+
+        #Проверяем, найден ли элемент
+        if (arr[pos] == target) {
+            return pos;
+        }
+
+        #Если целевой элемент больше, игнорируем левую часть
+        if (arr[pos] < target) {
+            low = pos + 1;
+        }
+        #Если целевой элемент меньше, игнорируем правую часть
+        else {
+            high = pos - 1;
+        }
+    }
+
+    return -1; #Элемент не найден
+}
+
+int main() {
+    std::vector<int> numbers = {10, 20, 30, 40, 50, 60, 70, 80, 90}; #Отсортированный массив
+    int target;
+
+    std::cout << "Введите число для поиска: ";
+    std::cin >> target;
+
+    int index = interpolationSearch(numbers, target);
+
+    if (index != -1) {
+        std::cout << "Элемент " << target << " найден на индексе " << index << std::endl;
+    } else {
+        std::cout << "Элемент " << target << " не найден." << std::endl;
+    }
+
+    return 0;
+}
