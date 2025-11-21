@@ -1,0 +1,26 @@
+int sequentialSearch(const std::vector<int>& arr, int target) {
+    for (size_t i = 0; i < arr.size(); ++i) {
+        if (arr[i] == target) {
+            return i; #Возвращаем индекс найденного элемента
+        }
+    }
+    return -1; #Если элемент не найден, возвращаем -1
+}
+
+int main() {
+    std::vector<int> numbers = {10, 20, 30, 40, 50};
+    int target;
+
+    std::cout << "Введите число для поиска: ";
+    std::cin >> target;
+
+    int index = sequentialSearch(numbers, target);
+
+    if (index != -1) {
+        std::cout << "Элемент " << target << " найден на индексе " << index << std::endl;
+    } else {
+        std::cout << "Элемент " << target << " не найден." << std::endl;
+    }
+
+    return 0;
+}
