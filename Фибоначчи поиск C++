@@ -1,0 +1,67 @@
+#Функция для поиска элемента с использованием поиска Фибоначчи
+int fibonacciSearch(const std::vector<int>& arr, int target) {
+    int n = arr.size();
+    int fibM2 = 0; // (m-2)'th Fibonacci number
+    int fibM1 = 1; // (m-1)'th Fibonacci number
+    int fibM = fibM2 + fibM1; // m'th Fibonacci number
+
+    #Найти наименьшее число Фибоначчи больше или равное n
+    while (fibM < n) {
+        fibM2 = fibM1;
+        fibM1 = fibM;
+        fibM = fibM2 + fibM1;
+    }
+
+    #Установить смещение для поиска
+    int offset = -1;
+
+    #Поиск элемента
+    while (fibM > 1) {
+        #Индекс, который мы будем проверять
+        int i = std::min(offset + fibM2, n - 1);
+
+        #Если элемент меньше, чем arr[i], то игнорируем правую часть
+        if (arr[i] < target) {
+            fibM = fibM1;
+            fibM1 = fibM2;
+            fibM2 = fibM - fibM1;
+            offset = i;
+        }
+        #Если элемент больше, чем arr[i], то игнорируем левую часть
+        else if (arr[i] > target) {
+            fibM = fibM2;
+            fibM1 = fibM1 - fibM2;
+            fibM2 = fibM - fibM1;
+        }
+        #Элемент найден
+        else {
+            return i;
+        }
+    }
+
+    #Сравнить последний элемент
+    if (fibM1 && arr[offset + 1] == target) {
+        return offset + 1;
+    }
+
+    #Элемент не найден
+    return -1;
+}
+
+int main() {
+    std::vector<int> numbers = {10, 22, 35, 40, 45, 50, 80, 82, 85, 90}; #Отсортированный массив
+    int target;
+
+    std::cout << "Введите число для поиска: ";
+    std::cin >> target;
+
+    int index = fibonacciSearch(numbers, target);
+
+    if (index != -1) {
+        std::cout << "Элемент " << target << " найден на индексе " << index << std::endl;
+    } else {
+        std::cout << "Элемент " << target << " не найден." << std::endl;
+    }
+
+    return 0;
+}
