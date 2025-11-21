@@ -1,0 +1,25 @@
+import random
+import time
+
+def gravity_sort(beads):
+    n = len(beads)
+    max_height = max(beads)
+    # Создаем двумерный массив для отображения бусин по уровням
+    levels = [[] for _ in range(max_height)]
+
+    # Распределяем бусины по уровням
+    for bead in beads:
+        for level in range(bead):
+            levels[level].append(bead)
+
+    # Собираем бусины снизу вверх
+    sorted_beads = []
+    for level in range(max_height):
+        sorted_beads.extend(levels[level])
+    return sorted_beads
+
+# Пример:
+beads = [3, 1, 4, 2, 5]
+print("До сортировки:", beads)
+sorted_beads = gravity_sort(beads)
+print("После сортировки:", sorted_beads)
