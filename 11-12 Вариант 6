@@ -1,0 +1,16 @@
+def count_vowels(s):
+    # Базовый случай: если строка пустая, возвращаем 0
+    if not s:
+        return 0
+    # Проверяем первый символ
+    first_char = s[0].lower()
+    # Гласные буквы
+    vowels = 'aeiou'
+    # Если первый символ гласная, добавляем 1, иначе 0
+    count_for_char = 1 if first_char in vowels else 0
+    # Рекурсивно вызываем функцию для остальной части строки
+    return count_for_char + count_vowels(s[1:])
+
+# Пример использования
+text = "Hello, World!"
+print(f"Количество гласных в строке '{text}': {count_vowels(text)}")
